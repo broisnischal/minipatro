@@ -5,10 +5,15 @@
   "scripts": {
     "build": "react-router build",
     "cf-typegen": "wrangler types",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply minipatro --local",
+    "db:migrate:remote": "wrangler d1 migrations apply minipatro --remote",
+    "db:studio": "drizzle-kit studio",
     "deploy": "npm run build && wrangler deploy",
     "dev": "react-router dev",
     "postinstall": "npm run cf-typegen",
     "preview": "npm run build && vite preview",
+    "taze": "taze -r",
     "typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
   },
   "dependencies": {

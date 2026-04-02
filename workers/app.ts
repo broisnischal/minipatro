@@ -1,4 +1,5 @@
 import { createRequestHandler } from "react-router";
+import { createAuth } from "@/lib/auth.server";
 
 declare module "react-router" {
   export interface AppLoadContext {
@@ -16,6 +17,12 @@ const requestHandler = createRequestHandler(
 
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+
+    if (url.pathname.startsWith("/api/auth")) {
+      return createAuth(env).handler(request);
+    }
+
     return requestHandler(request, {
       cloudflare: { env, ctx },
     });
